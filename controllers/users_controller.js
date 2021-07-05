@@ -29,10 +29,15 @@ module.exports.create = function(req, res){
 
         if(!user){
             User.create(req.body, function(err, user){
+                
                 if(err){console.log('error in creating the user while signing up'); return;}
                 
                 return res.redirect('/users/sign-in');
             })
+        }
+        else
+        {
+            return res.redirect('back');
         }
     })
 }
