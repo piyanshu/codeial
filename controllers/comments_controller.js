@@ -16,3 +16,13 @@ module.exports.create = function(req, res){
         }
     })
 };
+module.exports.destroy = function(req, res){
+    Comment.findById(req.params.id, function(err, comment){
+        if(err){console.log('Error in finding the comment');return;}
+        if(comment.user == req.user.id){
+            comment.remove();
+            return res.redirect('back');
+        }
+        return res.redirect('back');
+    })
+};
